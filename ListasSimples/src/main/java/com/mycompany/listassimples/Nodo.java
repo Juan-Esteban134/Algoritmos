@@ -9,11 +9,15 @@ public class Nodo {
 class Lista {
 
     private Nodo inicio;
+    private Nodo fin;
     private int tamano;
+    Nodo nodoActual;
 
     public Lista() {
         inicio = null;
+        fin = null;
         tamano = 0;
+
     }
 
     public Nodo getInicio() {
@@ -22,6 +26,14 @@ class Lista {
 
     public void setInicio(Nodo inicio) {
         this.inicio = inicio;
+    }
+
+    public Nodo getFin() {
+        return fin;
+    }
+
+    public void setFin(Nodo fin) {
+        this.fin = fin;
     }
 
     public int getTamano() {
@@ -36,11 +48,12 @@ class Lista {
         return inicio == null;
     }
 
-    public void agregarInicio(int valor) {
+    public void agregarInicio(int valor) { //preguntar si en el else es neceasrio poner la asignacion de que fin=nuevo
         Nodo nuevo = new Nodo();
         nuevo.valor = valor;
         if (esVacia()) {
             inicio = nuevo;
+            fin = nuevo;
         } else {
             nuevo.sig = inicio;
             inicio = nuevo;
@@ -54,12 +67,14 @@ class Lista {
 
         if (esVacia()) {
             inicio = nuevo;
+            fin = nuevo;
         } else {
             Nodo aux = inicio;
             while (aux.sig != null) {
                 aux = aux.sig;
             }
             aux.sig = nuevo;
+            fin = nuevo;
         }
         tamano++;
     }
@@ -86,7 +101,13 @@ class Lista {
         }
         return encontrado;
     }
-
+    
+    public void moverPuntero(Lista l){
+    
+        
+        
+    }
+    
     public void remover(int referencia) {
         // Consulta si el valor de referencia existe en la lista.
         if (buscar(referencia)) {
@@ -105,4 +126,37 @@ class Lista {
         }
     }
 
+    public void eliminarCola(Lista lista) {
+        if (lista.getInicio() != null) {
+            nodoActual = lista.getInicio();
+            if (nodoActual.sig == null) {
+                lista = null;
+                do {
+                    if (nodoActual.sig != null) {
+                        nodoActual = nodoActual.sig;
+                    } else {
+                        nodoActual.sig = null;
+                        fin = nodoActual;
+                    }
+                } while (nodoActual.sig != null);
+            }
+        }
+    }
+
+    public void eliminarCabeza(Lista lista) {
+
+        if (lista.getInicio() != null) {
+            nodoActual = lista.getInicio();
+            if (nodoActual.sig == null) {
+                lista = null;
+            }else{
+            nodoActual=nodoActual.sig;
+            inicio=null;
+            lista.setInicio(nodoActual);
+            }
+        }else{
+        esVacia();
+        }
+
+    }
 }
