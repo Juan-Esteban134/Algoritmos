@@ -28,8 +28,8 @@ public class Punto3 {
         miLista.agregarFinal(40);
 
         Nodo nodoActual = miLista.getInicio();
-        while (nodoActual.valor > 21) {
-            nodoActual = nodoActual.sig;
+        while (nodoActual.valor < 21) {
+            nodoActual = nodoActual.sig.sig;
         }
         System.out.println("El valor del nodo a eliminar es: " + nodoActual.valor);
         miLista.remover(nodoActual.valor);
